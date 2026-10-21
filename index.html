@@ -47,11 +47,12 @@
                     <div class="titre">
                         <label for="">Titre du problème *</label>
                         <input type="text" id="titre" placeholder="Connexion Wi-Fi instable">
+                        <p class="erreur_titre hidden">Entrer un titre valid</p>
                     </div>
 
                     <div class="catégorie_">
                         <label for="">Catégorie *</label>
-                        <select name="" id="">
+                        <select name="" id="categorie">
                             <option value="Réseau">Réseau</option>
                             <option value="Logiciel">Logiciel</option>
                             <option value="Matériel">Matériel</option>
@@ -60,7 +61,7 @@
 
                     <div class="priorité">
                         <label for="">Priorité *</label>
-                        <select name="" id="">
+                        <select name="" id="priorite">
                             <option value="Basse">Basse</option>
                             <option value="Normale">Normale</option>
                             <option value="Haute">Haute</option>
@@ -69,12 +70,13 @@
 
                     <div class="description">
                         <label for="">Description *</label>
-                        <input type="text" id="titre" placeholder="Décrivez votre problème ...">
+                        <input type="text" id="description" placeholder="Décrivez votre problème ...">
+                        <p class="erreur_description hidden">Enter une description valide</p>
                     </div>
                 </div>
 
                 <div class="add">
-                    <button>+ Ajouter la demande</button>
+                    <button id="add">+ Ajouter la demande</button>
                 </div>
             </form>
         </section>
@@ -169,71 +171,13 @@
                             <th><input type="checkbox" aria-label="Tout sélectionner"></th>
                             <th>N° Ticket</th>
                             <th>Titre de la demande</th>
-                            <th>Catégorie</th>
-                            <th>Priorité</th>
+                            <th> </th>
+                            <th> </th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table_body">
-                        <!-- <tr>
-                            <td><input type="checkbox"></td>
-                            <td class="id">HD-001</td>
-                            <td>
-                                <div class="demande">
-                                    <i class="fa-solid fa-bolt icon"></i>
-                                    <div>
-                                        <h3>Connexion Wi-Fi instable</h3>
-                                        <p>Le réseau se déconnecte régulièrement.</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="badge catégorie">Réseau</span></td>
-                            <td><span class="badge priorité Haute">Haute</span></td>
-                            <td class="actions-cell">
-                                <button class="modifier" title="Modifier">✎</button>
-                                <button class="supprimer" title="Supprimer">♜</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td class="id">HD-002</td>
-                            <td>
-                                <div class="demande">
-                                    <i class="fa-solid fa-download icon"></i>
-                                    <div>
-                                        <h3>Installation d’un logiciel</h3>
-                                        <p>Installer un logiciel sur le poste.</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="badge catégorie">Logiciel</span></td>
-                            <td><span class="badge priorité Normale">Normale</span></td>
-                            <td class="actions-cell">
-                                <button class="modifier" title="Modifier">✎</button>
-                                <button class="supprimer" title="Supprimer">♜</button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td class="id">HD-003</td>
-                            <td>
-                                <div class="demande">
-                                    <i class="fa-solid fa-keyboard icon"></i>
-                                    <div>
-                                        <h3>Clavier défectueux</h3>
-                                        <p>Certaines touches ne fonctionnent plus.</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="badge catégorie">Matériel</span></td>
-                            <td><span class="badge priorité Basse">Basse</span></td>
-                            <td class="actions-cell">
-                                <button class="modifier" title="Modifier">✎</button>
-                                <button class="supprimer" title="Supprimer">♜</button>
-                            </td>
-                        </tr> -->
+                        
                     </tbody>
                 </table>
             </div>
