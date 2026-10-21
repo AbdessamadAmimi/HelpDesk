@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- google font: Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- font font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- link css -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- link js -->
+    <script type="module" src="script/script.js"></script>
+
+    <!-- tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h2><span>H</span> HelpDesk</h2>
+        </div>
+        <div class="header-icon"><i class="fa-solid fa-bars"></i></div>
+        <div class="navbar">Atlas Solutions / Support</div>
+    </header>
+
+    <main>
+        <section class="formulaire">
+            <h1>Gestion des demandes</h1>
+            <p>Suivez et gérez les incidents informatiques.</p>
+            <form action="">
+                <div class="top-form">
+                    <h3>Créer une demande</h3>
+                    <p>Décrivez votre problème informatique.</p>
+                </div>
+                <div class="champs">
+                    <div class="titre">
+                        <label for="">Titre du problème *</label>
+                        <input type="text" id="titre" placeholder="Connexion Wi-Fi instable">
+                    </div>
+
+                    <div class="catégorie_">
+                        <label for="">Catégorie *</label>
+                        <select name="" id="">
+                            <option value="Réseau">Réseau</option>
+                            <option value="Logiciel">Logiciel</option>
+                            <option value="Matériel">Matériel</option>
+                        </select>
+                    </div>
+
+                    <div class="priorité">
+                        <label for="">Priorité *</label>
+                        <select name="" id="">
+                            <option value="Basse">Basse</option>
+                            <option value="Normale">Normale</option>
+                            <option value="Haute">Haute</option>
+                        </select>
+                    </div>
+
+                    <div class="description">
+                        <label for="">Description *</label>
+                        <input type="text" id="titre" placeholder="Décrivez votre problème ...">
+                    </div>
+                </div>
+
+                <div class="add">
+                    <button>+ Ajouter la demande</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="tickets">
+            <div class="hero">
+                <h2>Liste des demandes</h2>
+                <span class="nbr_demande"></span>
+                <div class="switch hide_switch">
+                    <button id="card" class="carte selected">▦ Cartes</button>
+                    <button id="tab" class="tab not-selected">☷ Tableau</button>
+                </div>
+            </div>
+            <div class="list">
+                <!-- <article>
+                    <div class="top">
+                        <i class="fa-solid fa-bolt icon"></i>
+                        <span class="id">HD-001</span>
+                    </div>
+
+                    <div class="title">
+                        <h3>Connexion Wi-Fi instable</h3>
+                        <p>Le réseau se déconnecte régulièrement.</p>
+                    </div>
+
+                    <div class="spec">
+                        <span class="catégorie Réseau">Réseau</span>
+                        <span class="priorité Haute">Haute</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="actions">
+                        <button class="modifier">✎ Modifier</button>
+                        <button class="supprimer">♜ Supprimer</button>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="top">
+                        <i class="fa-solid fa-bolt icon"></i>
+                        <span class="id">HD-002</span>
+                    </div>
+
+                    <div class="title">
+                        <h3>Installation d’un logiciel</h3>
+                        <p>Installer un logiciel sur le poste.</p>
+                    </div>
+
+                    <div class="spec">
+                        <span class="catégorie Logiciel">Logiciel</span>
+                        <span class="priorité Normal">Normal</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="actions">
+                        <button class="modifier">✎ Modifier</button>
+                        <button class="supprimer">♜ Supprimer</button>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="top">
+                        <i class="fa-solid fa-bolt icon"></i>
+                        <span class="id">HD-003</span>
+                    </div>
+
+                    <div class="title">
+                        <h3>Clavier défectueux</h3>
+                        <p>Certaines touches ne fonctionnent plus.</p>
+                    </div>
+
+                    <div class="spec">
+                        <span class="catégorie Matériel">Matériel</span>
+                        <span class="priorité Basse">Basse</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="actions">
+                        <button class="modifier">✎ Modifier</button>
+                        <button class="supprimer">♜ Supprimer</button>
+                    </div>
+                </article> -->
+            </div>
+
+            <div class="tableau hidden">
+                <table class="table" id="vue-tableau">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" aria-label="Tout sélectionner"></th>
+                            <th>N° Ticket</th>
+                            <th>Titre de la demande</th>
+                            <th>Catégorie</th>
+                            <th>Priorité</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table_body">
+                        <!-- <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="id">HD-001</td>
+                            <td>
+                                <div class="demande">
+                                    <i class="fa-solid fa-bolt icon"></i>
+                                    <div>
+                                        <h3>Connexion Wi-Fi instable</h3>
+                                        <p>Le réseau se déconnecte régulièrement.</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="badge catégorie">Réseau</span></td>
+                            <td><span class="badge priorité Haute">Haute</span></td>
+                            <td class="actions-cell">
+                                <button class="modifier" title="Modifier">✎</button>
+                                <button class="supprimer" title="Supprimer">♜</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="id">HD-002</td>
+                            <td>
+                                <div class="demande">
+                                    <i class="fa-solid fa-download icon"></i>
+                                    <div>
+                                        <h3>Installation d’un logiciel</h3>
+                                        <p>Installer un logiciel sur le poste.</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="badge catégorie">Logiciel</span></td>
+                            <td><span class="badge priorité Normale">Normale</span></td>
+                            <td class="actions-cell">
+                                <button class="modifier" title="Modifier">✎</button>
+                                <button class="supprimer" title="Supprimer">♜</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="id">HD-003</td>
+                            <td>
+                                <div class="demande">
+                                    <i class="fa-solid fa-keyboard icon"></i>
+                                    <div>
+                                        <h3>Clavier défectueux</h3>
+                                        <p>Certaines touches ne fonctionnent plus.</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="badge catégorie">Matériel</span></td>
+                            <td><span class="badge priorité Basse">Basse</span></td>
+                            <td class="actions-cell">
+                                <button class="modifier" title="Modifier">✎</button>
+                                <button class="supprimer" title="Supprimer">♜</button>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </section>
+    </main>
+</body>
+
+</html>
