@@ -39,27 +39,27 @@ export const color_priorite = [
 ]
 
 export const data = [
-    {
-        id: "1",
-        titre: "Connexion Wi-Fi instable",
-        categorie: "Réseau",
-        priorite: "Haute",
-        description: "Le réseau se déconnecte régulièrement."
-    },
+    //{
+    //     id: 1,
+    //     titre: "Connexion Wi-Fi instable",
+    //     categorie: "Réseau",
+    //     priorite: "Haute",
+    //     description: "Le réseau se déconnecte régulièrement."
+    // },
 
-    {
-        id: "2",
-        titre: "Installation d’un logiciel",
-        categorie: "Logiciel",
-        priorite: "Normale",
-        description: "Installer un logiciel sur le poste."
-    },
+    // {
+    //     id: 2,
+    //     titre: "Installation d’un logiciel",
+    //     categorie: "Logiciel",
+    //     priorite: "Normale",
+    //     description: "Installer un logiciel sur le poste."
+    // },
 
-    {
-        id: "3",
-        titre: "Clavier défectueux",
-        categorie: "Matériel",
-        priorite: "Basse",
-        description: "Certaines touches ne fonctionnent plus."
-    }
+    // {
+    //     id: 3,
+    //     titre: "Clavier défectueux",
+    //     categorie: "Matériel",
+    //     priorite: "Basse",
+    //     description: "Certaines touches ne fonctionnent plus."
+    // }
 ]

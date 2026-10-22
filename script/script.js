@@ -3,12 +3,25 @@ import { icon_categorie } from "./data.js";
 import { color_priorite } from "./data.js"
 
 let next_id = 1;
+let remember_id = null;
+let deleted_id = null;
+
+const input_titre = document.querySelector("#titre");
+const input_categorie = document.querySelector("#categorie");
+const input_priorite = document.querySelector("#priorite");
+const input_description = document.querySelector("#description");
+const titre_erreur = document.querySelector(".erreur_titre");
+const description_erreur = document.querySelector(".erreur_description");
+
+const delete_form = document.querySelector(".delete_form");
+let confirmeButton = document.querySelector(".confirmer");
 
 const div_list = document.querySelector(".list");
 const tab_list = document.querySelector(".tableau");
 const t_body = document.querySelector(".table_body");
 
 const buttonAjouter = document.querySelector("#add");
+const buttonModifier = document.querySelector("#edit");
 
 const card = document.querySelector("#card");
 const table = document.querySelector("#tab");
@@ -117,10 +130,14 @@ function AfficherTickets() {
         supprimer.classList.add("supprimer")
         modifier.textContent = "✎ Modifier";
         modifier.addEventListener("click", () => {
-            ModifierFct(d.id);
+            FillInput(d.id);
         });
+
         supprimer.textContent = "♜ Supprimer";
-        supprimer.setAttribute("onclick", `SupprimerFct(${d.id})`);
+        supprimer.addEventListener("click" , () => {
+            ConfirmeDelete(d.id);
+        })
+
         div_actions.append(modifier, supprimer);
 
         _parent.append(div_top, div_title, div_spec, hr, div_actions);
@@ -130,6 +147,10 @@ function AfficherTickets() {
 
 }
 AfficherTickets();
+buttonModifier.addEventListener("click" , (e) => {
+            e.preventDefault();
+            ModifierDemandes(remember_id);
+});
 
 function AfficherTableau() {
     resetTable();
@@ -205,17 +226,12 @@ function AfficherTableau() {
 }
 AfficherTableau();
 
-const input_titre = document.querySelector("#titre");
-const input_categorie = document.querySelector("#categorie");
-const input_priorite = document.querySelector("#priorite");
-const input_description = document.querySelector("#description");
-const titre_erreur = document.querySelector(".erreur_titre");
-const description_erreur = document.querySelector(".erreur_description");
+
 
 function resetInput() {
     input_titre.value = "";
     input_description.value = "";
-    buttonAjouter.textContent = "+ Ajouter la demande"
+    buttonAjouter.textContent = "+ Ajouter la demande";
 }
 
 function resetTikets() {
@@ -249,7 +265,6 @@ function AjouterDemande() {
         const __description = input_description.value;
         const __categorie = input_categorie.value;
         const __priorite = input_priorite.value;
-        let id = next_id;
         const objet = {
             id: next_id,
             titre: __titre,
@@ -272,36 +287,25 @@ buttonAjouter.addEventListener("click", (e) => {
     AjouterDemande();
 });
 
-function ModifierFct(modified_id) {
-    const demande = data.find((d) => d.id === modified_id);
+function ModifierDemandes(modified_id) {
+    let isValid = true;
 
-    input_titre.value = demande.titre;
-    input_description.value = demande.description;
-    input_categorie.value = demande.categorie;
-    input_priorite.value = demande.priorite;
+    if (input_titre.value === "") {
+        titre_erreur.classList.remove("hidden");
+        isValid = false;
+    }
+    else {
+        titre_erreur.classList.add("hidden");
+    }
+    if (input_description.value === "") {
+        description_erreur.classList.remove("hidden");
+        isValid = false;
+    }
+    else {
+        description_erreur.classList.add("hidden");
+    }
 
-    buttonAjouter.textContent = "Modifier la demande";
-
-    buttonAjouter.addEventListener("click", (e) => {
-        e.preventDefault();
-        let isValid = true;
-
-        if (input_titre.value === "") {
-            titre_erreur.classList.remove("hidden");
-            isValid = false;
-        }
-        else {
-            titre_erreur.classList.add("hidden");
-        }
-        if (input_description.value === "") {
-            description_erreur.classList.remove("hidden");
-            isValid = false;
-        }
-        else {
-            description_erreur.classList.add("hidden");
-        }
-
-        if (isValid) {
+    if (isValid) {
             const new_titre = input_titre.value;
             const new_description = input_description.value;
             const new_categorie = input_categorie.value;
@@ -313,14 +317,45 @@ function ModifierFct(modified_id) {
                 priorite: new_priorite,
                 description: new_description
             }
-            data.forEach((d, index) => {
-                if(d.id === modified_id) data[index] = objet;
-            });
+            let modified = data.findIndex((d) => d.id === modified_id);
+            data[modified] = objet;
             resetInput();
             AfficherTableau();
             AfficherTickets();
             CalculerDemandes();
-        }
-    })
+    }
+    buttonAjouter.classList.remove("hidden");
+    buttonModifier.classList.add("hidden");
+}
+
+
+
+function FillInput(modified_id) {
+    remember_id = modified_id; 
+    const demande = data.find((d) => d.id === modified_id);
+
+    input_titre.value = demande.titre;
+    input_description.value = demande.description;
+    input_categorie.value = demande.categorie;
+    input_priorite.value = demande.priorite;
+
+    buttonAjouter.classList.add("hidden");
+    buttonModifier.classList.remove("hidden");
 
 }
+
+function ConfirmeDelete(id){
+    deleted_id = id;
+    delete_form.classList.remove("hidden");
+}
+
+confirmeButton.addEventListener("click" , (e) => {
+    e.preventDefault();
+    const DeleteObjet = data.find((d) => d.id === deleted_id);
+    
+    data.splice(data.indexOf(DeleteObjet) , 1);
+    AfficherTableau();
+    AfficherTickets();
+    CalculerDemandes();
+    delete_form.classList.add("hidden");
+})

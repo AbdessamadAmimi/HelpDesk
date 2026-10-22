@@ -398,6 +398,55 @@ article hr {
     padding: 30px;
     color: #777;
 }
+.delete_form {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.delete_form form {
+    width: 350px;
+    padding: 30px;
+
+    background-color: white;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.delete_form h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.delete_form .confirmer {
+    padding: 10px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #d9534f;
+    color: white;
+
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.delete_form .confirmer:hover {
+    background-color: #c9302c;
+}
 
 @media (min-width: 768px) {
 
