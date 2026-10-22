@@ -369,3 +369,5 @@ confirmeButton.addEventListener("click" , (e) => {
     CalculerDemandes();
     delete_form.classList.add("hidden");
 })
+
+let data__ = [];
