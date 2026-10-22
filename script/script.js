@@ -373,7 +373,9 @@ confirmeButton.addEventListener("click", (e) => {
     data = JSON.parse(localStorage.getItem("data")) || [];
     const DeleteObjet = data.find((d) => d.id === deleted_id);
     data.splice(data.indexOf(DeleteObjet), 1);
-    localStorage.setItem("data", JSON.stringify(data))
+    localStorage.setItem("data", JSON.stringify(data));
+    selectFilter.value = "Afficher Tous";
+    input_search.value = "";
     AfficherTableau(data);
     AfficherTickets(data);
     CalculerDemandes();
