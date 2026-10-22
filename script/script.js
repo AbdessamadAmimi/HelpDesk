@@ -61,9 +61,6 @@ function getIcon(_categorie) {
     return icon_categorie.find((icon) => icon.nom === _categorie);
 }
 
-function getPriorite(_priorite) {
-    return color_priorite.find((color) => color.nom === _priorite);
-}
 
 function CalculerDemandes() {
     let counter = document.querySelector(".nbr_demande");
@@ -334,10 +331,12 @@ function ModifierDemandes(modified_id) {
             priorite: new_priorite,
             description: new_description
         }
-        let modified = data.findIndex((d) => d.id === modified_id);
         data = JSON.parse(localStorage.getItem("data")) || [];
+        let modified = data.findIndex((d) => d.id === modified_id);
         data[modified] = objet;
-        localStorage.setItem("data", JSON.stringify(data))
+        localStorage.setItem("data", JSON.stringify(data));
+        selectFilter.value = "Afficher Tous";
+        input_search.value = "";
         resetInput();
         AfficherTableau(data);
         AfficherTickets(data);
@@ -407,9 +406,9 @@ selectFilter.addEventListener("change", () => {
         AfficherTickets(data);
         AfficherTableau(data);
     }
-    else{
-    let filterData = data.filter((d) => d.categorie.toLowerCase() == selectFilter.value.toLowerCase());
-    AfficherTickets(filterData);
-    AfficherTableau(filterData);
+    else {
+        let filterData = data.filter((d) => d.categorie.toLowerCase() == selectFilter.value.toLowerCase());
+        AfficherTickets(filterData);
+        AfficherTableau(filterData);
     }
 })
