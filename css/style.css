@@ -193,7 +193,7 @@ article>.title>p {
     color: #8D99A8;
 }
 
-.spec{
+.spec {
     display: flex;
     gap: 10px;
 }
@@ -253,7 +253,7 @@ article hr {
     padding: 7px;
 }
 
-.switch > .not-selected {
+.switch>.not-selected {
     color: #7c8593;
     padding: 7px;
 }
@@ -268,36 +268,36 @@ article hr {
     display: none !important;
 }
 
-.Haute{
+.Haute {
     color: #BA6444;
     background-color: #FFF0E8;
 }
 
-.Normale{
+.Normale {
     color: #A67A2B;
     background-color: #FFF5DF;
 }
 
-.Basse{
+.Basse {
     color: #388867;
     background-color: #E8F6EE;
 }
 
-.Réseau{
+.Réseau {
     background-color: #EAF0F9 !important;
     color: black;
     padding: 15px;
     border-radius: 25%;
 }
 
-.Logiciel{
+.Logiciel {
     background-color: #F1EAF9 !important;
     color: black;
     padding: 15px;
     border-radius: 25%;
 }
 
-.Matériel{
+.Matériel {
     background-color: #E9F5F1 !important;
     color: black;
     padding: 15px;
@@ -305,39 +305,44 @@ article hr {
 }
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 14px;
-  overflow: hidden;
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
 }
+
 .table th {
-  text-align: left;
-  font-size: 13px;
-  color: #6b7686;
-  font-weight: 600;
-  padding: 16px;
-  background: #fafbfd;
+    text-align: left;
+    font-size: 13px;
+    color: #6b7686;
+    font-weight: 600;
+    padding: 16px;
+    background: #fafbfd;
 }
+
 .table td {
-  padding: 16px;
-  border-top: 1px solid #eef0f5;
-  vertical-align: middle;
+    padding: 16px;
+    border-top: 1px solid #eef0f5;
+    vertical-align: middle;
 }
+
 .table tbody tr:nth-child(even) {
-  background: #fafbfd;
+    background: #fafbfd;
 }
+
 .table .id {
-  font-weight: 700;
-  font-size: 14px;
+    font-weight: 700;
+    font-size: 14px;
 }
 
 /* Titre + icône */
 .demande {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
+
 /* .demande .icon {
   width: 44px;
   height: 44px;
@@ -349,45 +354,55 @@ article hr {
   flex: none;
 } */
 .demande h3 {
-  margin: 0;
-  font-size: 15px;
+    margin: 0;
+    font-size: 15px;
 }
+
 .demande p {
-  margin: 2px 0 0;
-  font-size: 12px;
-  color: #8a93a3;
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: #8a93a3;
 }
 
 /* Badges */
 .badge {
-  display: inline-block;
-  padding: 7px 18px;
-  border-radius: 99px;
-  font-size: 12px;
-  font-weight: 600;
+    display: inline-block;
+    padding: 7px 18px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
 }
-.catégorie { background: #eceff5; color: #4b5565; }
+
+.catégorie {
+    background: #eceff5;
+    color: #4b5565;
+}
 
 
 /* Actions */
 .actions-cell {
-  display: flex;
-  gap: 14px;
+    display: flex;
+    gap: 14px;
 }
+
 .actions-cell button {
-  border: 0;
-  background: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #6b7686;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #6b7686;
 }
+
 .actions-cell .supprimer {
-  color: #d9534f;
+    color: #d9534f;
 }
 
-.hidden { display: none !important; }
+.hidden {
+    display: none !important;
+}
 
-.titre > p , .description > p{
+.titre>p,
+.description>p {
     color: red;
     font-weight: bold;
     font-size: 12px;
@@ -398,6 +413,7 @@ article hr {
     padding: 30px;
     color: #777;
 }
+
 .delete_form {
     position: fixed;
     inset: 0;
@@ -414,7 +430,7 @@ article hr {
     width: 350px;
     padding: 30px;
 
-    background-color: white;
+    background-color: rgba(255, 0, 0, 0.322);
     border-radius: 12px;
 
     display: flex;
@@ -446,6 +462,22 @@ article hr {
 
 .delete_form .confirmer:hover {
     background-color: #c9302c;
+}
+
+.delete_form .annuler {
+    padding: 10px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: white;
+    color: black;
+
+    font-size: 1rem;
+    cursor: pointer;
+}
+.delete_form .annuler:hover{
+    background-color: rgb(145, 144, 144);
 }
 
 @media (min-width: 768px) {

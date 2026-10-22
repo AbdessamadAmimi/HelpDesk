@@ -1,10 +1,12 @@
-import { data } from "./data.js";
+// import { data } from "./data.js";
 import { icon_categorie } from "./data.js";
 import { color_priorite } from "./data.js"
 
 let next_id = 1;
 let remember_id = null;
 let deleted_id = null;
+
+let data = JSON.parse(localStorage.getItem("data")) || [];
 
 const input_titre = document.querySelector("#titre");
 const input_categorie = document.querySelector("#categorie");
@@ -15,6 +17,7 @@ const description_erreur = document.querySelector(".erreur_description");
 
 const delete_form = document.querySelector(".delete_form");
 let confirmeButton = document.querySelector(".confirmer");
+let AnnulerButton = document.querySelector(".annuler");
 
 const div_list = document.querySelector(".list");
 const tab_list = document.querySelector(".tableau");
@@ -70,6 +73,7 @@ CalculerDemandes();
 
 function AfficherTickets() {
     resetTikets();
+    data = JSON.parse(localStorage.getItem("data")) || [];
     if (data.length === 0) {
         const div = document.createElement("div");
 
@@ -134,7 +138,7 @@ function AfficherTickets() {
         });
 
         supprimer.textContent = "♜ Supprimer";
-        supprimer.addEventListener("click" , () => {
+        supprimer.addEventListener("click", () => {
             ConfirmeDelete(d.id);
         })
 
@@ -147,12 +151,13 @@ function AfficherTickets() {
 
 }
 AfficherTickets();
-buttonModifier.addEventListener("click" , (e) => {
-            e.preventDefault();
-            ModifierDemandes(remember_id);
+buttonModifier.addEventListener("click", (e) => {
+    e.preventDefault();
+    ModifierDemandes(remember_id);
 });
 
 function AfficherTableau() {
+    data = JSON.parse(localStorage.getItem("data")) || [];
     resetTable();
     if (data.length === 0) {
         const tr = document.createElement("tr");
@@ -217,16 +222,16 @@ function AfficherTableau() {
         btn_1.addEventListener("click", () => {
             FillInput(d.id);
             console.log("modifier tableau");
-            
+
         });
         const btn_2 = document.createElement("button");
         btn_2.classList = "supprimer";
         btn_2.title = "Supprimer";
         btn_2.textContent = "♜";
-        btn_2.addEventListener("click" , () => {
+        btn_2.addEventListener("click", () => {
             ConfirmeDelete(d.id);
             console.log("supprimer tableau");
-            
+
         });
         actions_td.append(btn_1, btn_2);
 
@@ -283,7 +288,9 @@ function AjouterDemande() {
             description: __description
         }
         next_id++;
+        data = JSON.parse(localStorage.getItem("data")) || [];
         data.push(objet);
+        localStorage.setItem("data", JSON.stringify(data))
         resetInput();
         AfficherTableau();
         AfficherTickets();
@@ -316,32 +323,34 @@ function ModifierDemandes(modified_id) {
     }
 
     if (isValid) {
-            const new_titre = input_titre.value;
-            const new_description = input_description.value;
-            const new_categorie = input_categorie.value;
-            const new_priorite = input_priorite.value;
-            const objet = {
-                id: modified_id,
-                titre: new_titre,
-                categorie: new_categorie,
-                priorite: new_priorite,
-                description: new_description
-            }
-            let modified = data.findIndex((d) => d.id === modified_id);
-            data[modified] = objet;
-            resetInput();
-            AfficherTableau();
-            AfficherTickets();
-            CalculerDemandes();
-    }
-    buttonAjouter.classList.remove("hidden");
+        const new_titre = input_titre.value;
+        const new_description = input_description.value;
+        const new_categorie = input_categorie.value;
+        const new_priorite = input_priorite.value;
+        const objet = {
+            id: modified_id,
+            titre: new_titre,
+            categorie: new_categorie,
+            priorite: new_priorite,
+            description: new_description
+        }
+        let modified = data.findIndex((d) => d.id === modified_id);
+        data = JSON.parse(localStorage.getItem("data")) || [];
+        data[modified] = objet;
+        localStorage.setItem("data", JSON.stringify(data))
+        resetInput();
+        AfficherTableau();
+        AfficherTickets();
+        CalculerDemandes();
+        buttonAjouter.classList.remove("hidden");
     buttonModifier.classList.add("hidden");
+    }
 }
 
 
 
 function FillInput(modified_id) {
-    remember_id = modified_id; 
+    remember_id = modified_id;
     const demande = data.find((d) => d.id === modified_id);
 
     input_titre.value = demande.titre;
@@ -354,20 +363,24 @@ function FillInput(modified_id) {
 
 }
 
-function ConfirmeDelete(id){
+function ConfirmeDelete(id) {
     deleted_id = id;
     delete_form.classList.remove("hidden");
 }
 
-confirmeButton.addEventListener("click" , (e) => {
+confirmeButton.addEventListener("click", (e) => {
     e.preventDefault();
+    data = JSON.parse(localStorage.getItem("data")) || [];
     const DeleteObjet = data.find((d) => d.id === deleted_id);
-    
-    data.splice(data.indexOf(DeleteObjet) , 1);
+    data.splice(data.indexOf(DeleteObjet), 1);
+    localStorage.setItem("data", JSON.stringify(data))
     AfficherTableau();
     AfficherTickets();
     CalculerDemandes();
     delete_form.classList.add("hidden");
 })
 
-let data__ = [];
+AnnulerButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    delete_form.classList.add("hidden");
+})
