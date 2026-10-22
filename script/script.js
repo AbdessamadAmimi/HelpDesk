@@ -214,10 +214,20 @@ function AfficherTableau() {
         btn_1.classList = "modifier";
         btn_1.title = "Modifier";
         btn_1.textContent = "✎";
+        btn_1.addEventListener("click", () => {
+            FillInput(d.id);
+            console.log("modifier tableau");
+            
+        });
         const btn_2 = document.createElement("button");
         btn_2.classList = "supprimer";
         btn_2.title = "Supprimer";
         btn_2.textContent = "♜";
+        btn_2.addEventListener("click" , () => {
+            ConfirmeDelete(d.id);
+            console.log("supprimer tableau");
+            
+        });
         actions_td.append(btn_1, btn_2);
 
         tr.append(input_td, id_td, demande_td, categorie_td, priorite_td, actions_td);
