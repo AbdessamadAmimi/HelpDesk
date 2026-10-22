@@ -2,7 +2,7 @@
 import { icon_categorie } from "./data.js";
 import { color_priorite } from "./data.js"
 
-let next_id = 1;
+let next_id = JSON.parse(localStorage.getItem("id")) || 1;
 let remember_id = null;
 let deleted_id = null;
 
@@ -278,6 +278,7 @@ function AjouterDemande() {
         const __description = input_description.value;
         const __categorie = input_categorie.value;
         const __priorite = input_priorite.value;
+        next_id = JSON.parse(localStorage.getItem("id")) || 1;
         const objet = {
             id: next_id,
             titre: __titre,
@@ -286,6 +287,7 @@ function AjouterDemande() {
             description: __description
         }
         next_id++;
+        localStorage.setItem("id", JSON.stringify(next_id));
         data = JSON.parse(localStorage.getItem("data")) || [];
         data.push(objet);
         localStorage.setItem("data", JSON.stringify(data))
@@ -341,7 +343,7 @@ function ModifierDemandes(modified_id) {
         AfficherTickets(data);
         CalculerDemandes();
         buttonAjouter.classList.remove("hidden");
-    buttonModifier.classList.add("hidden");
+        buttonModifier.classList.add("hidden");
     }
 }
 
@@ -384,13 +386,28 @@ AnnulerButton.addEventListener("click", (e) => {
 })
 
 const input_search = document.querySelector("#search");
-function Search(){
-    data = JSON.parse(localStorage.getItem("data")) || []
+function Search() {
+    data = JSON.parse(localStorage.getItem("data")) || [];
     let searchData = data.filter((d) => d.titre.toLowerCase().includes(input_search.value.toLowerCase()));
     AfficherTickets(searchData);
-    AfficherTableau(searchData)
+    AfficherTableau(searchData);
 }
 
-input_search.addEventListener("input" , () => {
+input_search.addEventListener("input", () => {
     Search();
+})
+
+const selectFilter = document.querySelector("#filter");
+selectFilter.addEventListener("change", () => {
+    data = JSON.parse(localStorage.getItem("data")) || [];
+    if (selectFilter.value == "Afficher Tous") {
+        console.log(data);
+        AfficherTickets(data);
+        AfficherTableau(data);
+    }
+    else{
+    let filterData = data.filter((d) => d.categorie.toLowerCase() == selectFilter.value.toLowerCase());
+    AfficherTickets(filterData);
+    AfficherTableau(filterData);
+    }
 })
