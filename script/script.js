@@ -71,10 +71,9 @@ function CalculerDemandes() {
 }
 CalculerDemandes();
 
-function AfficherTickets() {
+function AfficherTickets(_data) {
     resetTikets();
-    data = JSON.parse(localStorage.getItem("data")) || [];
-    if (data.length === 0) {
+    if (_data.length === 0) {
         const div = document.createElement("div");
 
         const p = document.createElement("p");
@@ -86,7 +85,7 @@ function AfficherTickets() {
 
         return;
     }
-    data.forEach((d) => {
+    _data.forEach((d) => {
 
         const this_icon = getIcon(d.categorie);
 
@@ -150,16 +149,15 @@ function AfficherTickets() {
 
 
 }
-AfficherTickets();
+AfficherTickets(data);
 buttonModifier.addEventListener("click", (e) => {
     e.preventDefault();
     ModifierDemandes(remember_id);
 });
 
-function AfficherTableau() {
-    data = JSON.parse(localStorage.getItem("data")) || [];
+function AfficherTableau(_data) {
     resetTable();
-    if (data.length === 0) {
+    if (_data.length === 0) {
         const tr = document.createElement("tr");
 
         const td = document.createElement("td");
@@ -172,7 +170,7 @@ function AfficherTableau() {
 
         return;
     }
-    data.forEach((d) => {
+    _data.forEach((d) => {
 
         const this_icon = getIcon(d.categorie);
 
@@ -239,7 +237,7 @@ function AfficherTableau() {
         t_body.append(tr);
     })
 }
-AfficherTableau();
+AfficherTableau(data);
 
 
 
@@ -292,8 +290,8 @@ function AjouterDemande() {
         data.push(objet);
         localStorage.setItem("data", JSON.stringify(data))
         resetInput();
-        AfficherTableau();
-        AfficherTickets();
+        AfficherTableau(data);
+        AfficherTickets(data);
         CalculerDemandes();
     }
 
@@ -339,8 +337,8 @@ function ModifierDemandes(modified_id) {
         data[modified] = objet;
         localStorage.setItem("data", JSON.stringify(data))
         resetInput();
-        AfficherTableau();
-        AfficherTickets();
+        AfficherTableau(data);
+        AfficherTickets(data);
         CalculerDemandes();
         buttonAjouter.classList.remove("hidden");
     buttonModifier.classList.add("hidden");
@@ -374,8 +372,8 @@ confirmeButton.addEventListener("click", (e) => {
     const DeleteObjet = data.find((d) => d.id === deleted_id);
     data.splice(data.indexOf(DeleteObjet), 1);
     localStorage.setItem("data", JSON.stringify(data))
-    AfficherTableau();
-    AfficherTickets();
+    AfficherTableau(data);
+    AfficherTickets(data);
     CalculerDemandes();
     delete_form.classList.add("hidden");
 })
@@ -383,4 +381,16 @@ confirmeButton.addEventListener("click", (e) => {
 AnnulerButton.addEventListener("click", (e) => {
     e.preventDefault();
     delete_form.classList.add("hidden");
+})
+
+const input_search = document.querySelector("#search");
+function Search(){
+    data = JSON.parse(localStorage.getItem("data")) || []
+    let searchData = data.filter((d) => d.titre.toLowerCase().includes(input_search.value.toLowerCase()));
+    AfficherTickets(searchData);
+    AfficherTableau(searchData)
+}
+
+input_search.addEventListener("input" , () => {
+    Search();
 })

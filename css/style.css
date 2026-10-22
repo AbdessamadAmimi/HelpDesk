@@ -145,6 +145,7 @@ form>.add>button {
 
 .tickets>.hero {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
 }
@@ -476,8 +477,51 @@ article hr {
     font-size: 1rem;
     cursor: pointer;
 }
-.delete_form .annuler:hover{
+
+.delete_form .annuler:hover {
     background-color: rgb(145, 144, 144);
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.hero-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: 300px;
+    padding: 10px 15px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.search span {
+    font-size: 20px;
+    color: #777;
+}
+
+.search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.search input::placeholder {
+    color: #999;
 }
 
 @media (min-width: 768px) {
