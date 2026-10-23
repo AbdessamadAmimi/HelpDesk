@@ -230,6 +230,18 @@ article hr {
     cursor: pointer;
 }
 
+.mainSupprimer{
+    color: white;
+    cursor: pointer;
+    border-color: white;
+    background-color: #CC626A;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+input[type="checkbox"]{
+    cursor: pointer;
+}
+
 .actions {
     font-size: 13px;
     display: flex;

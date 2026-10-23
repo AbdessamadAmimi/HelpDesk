@@ -8,6 +8,9 @@ let deleted_id = null;
 
 let data = JSON.parse(localStorage.getItem("data")) || [];
 
+const mainCheckbox = document.querySelector(".allChecked");
+const mainSupprimer = document.querySelector(".mainSupprimer");
+
 const input_titre = document.querySelector("#titre");
 const input_categorie = document.querySelector("#categorie");
 const input_priorite = document.querySelector("#priorite");
@@ -175,7 +178,13 @@ function AfficherTableau(_data) {
 
         const input_td = document.createElement("td");
         const checkbox = document.createElement("input");
+        checkbox.dataset.id = d.id;
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) checkbox.classList.add("isChecked");
+            else checkbox.classList.remove("isChecked");
+        });
         checkbox.type = 'checkbox';
+        checkbox.classList.add("oneCheckbox");
         input_td.append(checkbox);
 
         const id_td = document.createElement("td");
@@ -411,4 +420,51 @@ selectFilter.addEventListener("change", () => {
         AfficherTickets(filterData);
         AfficherTableau(filterData);
     }
+})
+
+
+
+mainCheckbox.addEventListener("change", () => {
+    const allCheckeBox = document.querySelectorAll(".oneCheckbox");
+    if (mainCheckbox.checked) {
+        allCheckeBox.forEach((check) => {
+            // if(!check.classList.contains("isChecked")) check.classList.add("isChecked");
+            check.checked = true;
+        });
+    }
+    else {
+        allCheckeBox.forEach((check) => {
+            // if(check.classList.contains("isChecked")) check.classList.remove("isChecked");
+            check.checked = false;
+        });
+    }
+})
+
+mainSupprimer.addEventListener("click", () => {
+    if (confirm("confirmer de supprimer")) {
+        data = JSON.parse(localStorage.getItem("data")) || [];
+        if (mainCheckbox.checked) {
+            data.splice(0, data.length);
+            // localStorage.setItem("data", JSON.stringify(data));
+            mainCheckbox.checked = false;
+            selectFilter.value = "Afficher Tous";
+            input_search.value = "";
+            AfficherTableau(data);
+            AfficherTickets(data);
+            CalculerDemandes();
+        }
+        else {
+            const checkedList = document.querySelectorAll(".isChecked");
+            let demandes = [];
+            checkedList.forEach((check) => {
+                demandes.push(data.find((d) => d.id == check.dataset.id));
+            });
+            demandes.forEach((demande) => data.splice(data.indexOf(demande), 1));
+            checkedList.forEach((check) => check.classList.remove("isChecked"));
+            AfficherTableau(data);
+            AfficherTickets(data);
+            CalculerDemandes();
+        }
+    }
+    localStorage.setItem("data", JSON.stringify(data));
 })
