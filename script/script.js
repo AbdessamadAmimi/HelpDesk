@@ -74,7 +74,7 @@ function AfficherTickets(_data) {
         const div = document.createElement("div");
 
         const p = document.createElement("p");
-        p.textContent = "Aucune demande n'est ajoutée";
+        p.textContent = "Aucune demande n'est trouvée";
         p.classList.add("aucune-demande");
 
         div.append(p);
@@ -159,7 +159,7 @@ function AfficherTableau(_data) {
 
         const td = document.createElement("td");
         td.colSpan = 6;
-        td.textContent = "Aucune demande n'est ajoutée";
+        td.textContent = "Aucune demande n'est trouvée";
         td.classList.add("aucune-demande");
 
         tr.append(td);

@@ -524,6 +524,12 @@ article hr {
     color: #999;
 }
 
+select{
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+
 @media (min-width: 768px) {
 
     .hide_switch {
